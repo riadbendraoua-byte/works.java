@@ -5,8 +5,12 @@ public class actlis implements ActionListener {
 	
 		protected JButton b1,b2;
                 protected JLabel l;
+		private void ins (JButton bt){
+	bt.setFocusPainted(false);
+	bt.setBorderPainted(false);
+	}
 	public void act () {
-	JFrame f = new JFrame ("act");
+	JFrame f = new JFrame ("miniprogram(essayer)");
 	JPanel p1 = new JPanel ();
 	 JPanel p2 = new JPanel ();
 	/*panel 1*/
@@ -18,6 +22,8 @@ public class actlis implements ActionListener {
 	b2=new JButton ("avengers doomsday");
 	b1.setBackground (new Color (255,1,1));
 	b2.setBackground (new Color (1,255,1));
+	ins(b1);
+	ins(b2);
 	p2.add(b1);
 	p2.add(b2);
 	f.add(p1,BorderLayout.NORTH);
