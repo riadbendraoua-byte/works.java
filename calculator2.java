@@ -251,33 +251,27 @@ public class calculator implements ActionListener {
                 txt.setText(se);
 	    
 	}else{
-	String []parts2 = s.split("+"); 
-        double riad = 0 ;	
-	for (int km = 0 ;km<=(parts2[km].length()-1);km++){
-	if (parts2[km].contains("-")){
-		  String []parts3 = s.split("-");
-		  for (int km1 = 0 ;km1<=(parts3[km1].length()-1);km1++){
-	  if (parts3[km1].contains("*")){
-		    String []parts4 = s.split("*");
-		    for (int km2 = 0 ;km2<=(parts4[km2].length()-1);km2++){
-	    if (parts4[km2].contains("/")){
-             blackops(parts4[km2],"/");
-               
-	    
-	    
+        String[] parts2=s.split("+);
+       for (int o1=0 ;o1<=parts2.length;o1++){
+         if (parts2[o1].contains("-"){
+	    String [] parts3 = parts2[o1].split("-");
+	    for (int o2=0 ; o2<=parts3.length;o2++){
+	    if (parts3[o2].contains("*"){
+	     String[] parts4 = parts3[o2].split("*");
+	      for (int o3 = 0;o3<=parts4.length;o3++){
+	       if (parts4 [o3].contains ("/"){
+	       blackops(parts4[o3],"/");
+	       }//if
+			   
+	      }
+	      blackops(parts3[o2],"*");
 	    }
-	  }
-	  blackops(parts3[km1],"*");
-	  }
-		  }
-		  blackops(parts2[km],"-");
-		  }
-	
-	riad =riad + dblstr(parts2[km]);
-	}
-
-	String walid = String.valueOf(riad);
-	txt.setText(walid);
+	 
+	    }
+	    blackops(parts2 [o1],"-");
+	 }
+       }
+       blackops(parts2       
       	}/*else*/
         
 	
