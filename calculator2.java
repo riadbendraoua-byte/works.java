@@ -266,7 +266,13 @@ public class calculator implements ActionListener {
 	      }
 	      blackops(parts3[o2],"*");
 	    }
-	 
+	         //
+	    //
+	    //
+	    // it is still under work  
+	    //
+	    //
+	    //
 	    }
 	    blackops(parts2 [o1],"-");
 	 }
