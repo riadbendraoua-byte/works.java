@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 public class Calculator implements ActionListener {
 	protected JButton b1,b2,b3,b4,b5,b6,b7,b8,b9,b0,cl,eff,plus,moin,multi,div ;
 	protected JTextField txt ;
@@ -12,47 +14,60 @@ public class Calculator implements ActionListener {
 	private String calculemultiplex (ArrayList <String> numbers , ArrayList <String> opers){
 	while (numbers.size() > 1){
 	  while (opers.contains ("*") ||opers.contains ("/")){
-		for (String op : opers ){
+		  int i =0;
+		while (i <opers.size()){
+			String op = opers.get (i);
 			double result = 0 ;
-	         if (op == "*"){
-                 result =dblstr(numbers.get(opers.indexOf(op)))*dblstr(numbers.get(opers.indexOf(op)+1));		 
-		 numbers.add(opers.indexOf(op),String.valueOf(result));
-		 numbers.remove(opers.indexOf(op)+1);
-		 numbers.remove(opers.indexOf(op)+2);
-		 opers.remove(opers.indexOf(op));
-		 }
-                 if (op == "/"){
-                 result =dblstr(numbers.get(opers.indexOf(op)))/dblstr(numbers.get(opers.indexOf(op)+1));                
-                 numbers.add(opers.indexOf(op),String.valueOf(result));
-                 numbers.remove(opers.indexOf(op)+1);
-		 numbers.remove(opers.indexOf(op)+2);
-                 opers.remove(opers.indexOf(op));
+		
+	         if (op.equals("*")){
+		i=opers.indexOf(op);
+                 result =dblstr(numbers.get(i))*dblstr(numbers.get(i+1));
+		 numbers.add(i,String.valueOf(result));
+		 
+		 numbers.remove(i+1);
+		 opers.remove(i);
+		 }else{
+			 String op = opers.get(i);
+                 if (op.equals("/")){
+	         i= opers.indexOf(op);
+                 result =dblstr(numbers.get(i))/dblstr(numbers.get(i+1));	 
+                 numbers.add(i,String.valueOf(result));
                  
-		}
+		 numbers.remove(i+1);
+                 opers.remove(i);
+                 
+		}else {
+			i++;
+		 }
           }/*for*/
           
 	  }
 	      while (opers.size() > 0 ){
-	      for (String op : opers){
+	      while (i<opers.size()){
 		      double res =0;
-	       if (op == "+"){
-	       res = dblstr(numbers.get(opers.indexOf(op)))+dblstr(numbers.get(opers.indexOf(op)));
-	       numbers.add(opers.indexOf(op),String.valueOf(res));
-	       numbers.remove(opers.indexOf(op)+1);
-	       numbers.remove(opers.indexOf(op)+2);
-	       opers.remove(opers.indexOf(op));
+		      int i = opers.indexOf(op);
+	       if (op.equals("+")){
+	       res = dblstr(numbers.get(i))+dblstr(numbers.get(i+1));
+	       numbers.add(i,String.valueOf(res));
+	       numbers.remove(i+1);
+	       opers.remove(i);
 	       }//if
-	      if (op == "-"){
-                 res =dblstr(numbers.get(opers.indexOf(op)))-dblstr(numbers.get(opers.indexOf(op)+1));                
-                 numbers.add(opers.indexOf(op),String.valueOf(res));
-                 numbers.remove(opers.indexOf(op)+1);
-                 numbers.remove(opers.indexOf(op)+2);
-                 opers.remove(opers.indexOf(op));	      
+	       else{
+	      if (op.equals("-")){
+		  
+                 res =dblstr(numbers.get(i))-dblstr(numbers.get(i+1));                
+                 numbers.set(i,String.valueOf(res));
+                 
+                 numbers.remove(i+1);
+                 opers.remove(i);	      
+	      }else {
+	      i++;
 	      }
+	       }
 	      }
 	      }//while
 	}/*while */
-	return numbers.get(1);	
+	return numbers.get(0);	
 	} //proce 
 	private double dblstr(String k){
         try {
@@ -63,26 +78,6 @@ public class Calculator implements ActionListener {
 	return 0;
 	}
 	}
-	private void blackops (String part,String op){
-	String[]table=part.split(op);
-	double resultat = 0 ;
-	for (int j =0 ;j<=(table.length -1);j++){
-	if (op=="+"){
-	resultat +=dblstr(table[j]);
-	}//if
-	 if (op=="-"){
-        resultat -=dblstr(table[j]);
-        }//if
-	 if (op=="*"){
-        resultat *=dblstr(table[j]);
-        }//if
-	 if (op=="/"){
-        resultat /=dblstr(table[j]);
-        }//if
-	part = String.valueOf(resultat);
-	}//for
-	
-	}//proce
 
 	public void  calcule () {
 	JPanel p1 = new JPanel () ; 
@@ -299,10 +294,10 @@ public class Calculator implements ActionListener {
 	}else{
 		ArrayList <String > opers = new ArrayList <>();
 		ArrayList <String > numbers = new ArrayList <>();
-                String [] help = s.split("");
-		for (String ko : help){
-			
-		  if (ko == "+" || ko == "-" || ko =="*" || ko =="/"){
+                Matcher m = Pattern.compile("\\d+\\.̣?\\d*|[+\\-*/]").matcher (s);
+		while (m.find()){
+		 String ko = m.group();
+		  if (ko.equals("+") || ko.equals("-") || ko.equals("*") || ko.equals("/")){
 		  opers.add(ko);
 		  }else{
 		  numbers.add(ko);
