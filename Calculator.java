@@ -9,7 +9,7 @@ public class Calculator implements ActionListener {
 	bt.setFocusPainted(false);
 	bt.setBorderPainted(false);
 	}
-	private String calclemultiplex (ArrayList <String> numbers , ArrayList <String> opers){
+	private String calculemultiplex (ArrayList <String> numbers , ArrayList <String> opers){
 	while (numbers.size() > 1){
 	  while (opers.contains ("*") ||opers.contains ("/")){
 		for (String op : opers ){
@@ -299,12 +299,13 @@ public class Calculator implements ActionListener {
 	}else{
 		ArrayList <String > opers = new ArrayList <>();
 		ArrayList <String > numbers = new ArrayList <>();
-
-		for (Char i :s.toCharArray()){
-		  if (i == "+" || i == "-" || i=="*" || i="/"){
-		  opers.add(i);
+                String [] help = s.split("");
+		for (String ko : help){
+			
+		  if (ko == "+" || ko == "-" || ko =="*" || ko =="/"){
+		  opers.add(ko);
 		  }else{
-		  numbers.add(i);
+		  numbers.add(ko);
 		  }
 		}
 		String  xxx = calculemultiplex (numbers,opers);
