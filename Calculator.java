@@ -1,13 +1,28 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-public class calculator implements ActionListener {
+import java.util.ArrayList;
+public class Calculator implements ActionListener {
 	protected JButton b1,b2,b3,b4,b5,b6,b7,b8,b9,b0,cl,eff,plus,moin,multi,div ;
 	protected JTextField txt ;
 	private void ins (JButton bt){
 	bt.setFocusPainted(false);
 	bt.setBorderPainted(false);
 	}
+	private double calclemultiplex (ArrayList <String> numbers , ArrayList <String> opers){
+	while (numbers.size() > 1 && opers.size() > 0 ){
+	  while (opers.contains ("*") ||opers.contains ("/")){
+		for (String op : opers ){
+	         if (op == "*"){
+
+		 }
+	  
+	  
+	  }//for 
+	  }
+	}/*while */
+        return 0 ;	
+	} //proce 
 	private double dblstr(String k){
         try {
 		double f=0;
@@ -153,7 +168,7 @@ public class calculator implements ActionListener {
 	f.setVisible(true);
 	}
 	public static void main (String []args){
-	calculator c = new calculator ();
+	Calculator c = new Calculator ();
 	c.calcule ();
 	}
 	@Override 
@@ -251,33 +266,7 @@ public class calculator implements ActionListener {
                 txt.setText(se);
 	    
 	}else{
-        String[] parts2=s.split("+);
-       for (int o1=0 ;o1<=parts2.length;o1++){
-         if (parts2[o1].contains("-"){
-	    String [] parts3 = parts2[o1].split("-");
-	    for (int o2=0 ; o2<=parts3.length;o2++){
-	    if (parts3[o2].contains("*"){
-	     String[] parts4 = parts3[o2].split("*");
-	      for (int o3 = 0;o3<=parts4.length;o3++){
-	       if (parts4 [o3].contains ("/"){
-	       blackops(parts4[o3],"/");
-	       }//if
-			   
-	      }
-	      blackops(parts3[o2],"*");
-	    }
-	         //
-	    //
-	    //
-	    // it is still under work  
-	    //
-	    //
-	    //
-	    }
-	    blackops(parts2 [o1],"-");
-	 }
-       }
-       blackops(parts2       
+          
       	}/*else*/
         
 	
