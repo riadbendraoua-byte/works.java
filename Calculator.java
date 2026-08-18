@@ -9,8 +9,8 @@ public class Calculator implements ActionListener {
 	bt.setFocusPainted(false);
 	bt.setBorderPainted(false);
 	}
-	private double calclemultiplex (ArrayList <String> numbers , ArrayList <String> opers){
-	while (numbers.size() > 1 && opers.size() > 0 ){
+	private String calclemultiplex (ArrayList <String> numbers , ArrayList <String> opers){
+	while (numbers.size() > 1){
 	  while (opers.contains ("*") ||opers.contains ("/")){
 		for (String op : opers ){
 			double result = 0 ;
@@ -18,13 +18,41 @@ public class Calculator implements ActionListener {
                  result =dblstr(numbers.get(opers.indexOf(op)))*dblstr(numbers.get(opers.indexOf(op)+1));		 
 		 numbers.add(opers.indexOf(op),String.valueOf(result));
 		 numbers.remove(opers.indexOf(op)+1);
+		 numbers.remove(opers.indexOf(op)+2);
 		 opers.remove(opers.indexOf(op));
 		 }
-	  }//for
-	   
+                 if (op == "/"){
+                 result =dblstr(numbers.get(opers.indexOf(op)))/dblstr(numbers.get(opers.indexOf(op)+1));                
+                 numbers.add(opers.indexOf(op),String.valueOf(result));
+                 numbers.remove(opers.indexOf(op)+1);
+		 numbers.remove(opers.indexOf(op)+2);
+                 opers.remove(opers.indexOf(op));
+                 
+		}
+          }/*for*/
+          
 	  }
+	      while (opers.size() > 0 ){
+	      for (String op : opers){
+		      double res =0;
+	       if (op == "+"){
+	       res = dblstr(numbers.get(opers.indexOf(op)))+dblstr(numbers.get(opers.indexOf(op)));
+	       numbers.add(opers.indexOf(op),String.valueOf(res));
+	       numbers.remove(opers.indexOf(op)+1);
+	       numbers.remove(opers.indexOf(op)+2);
+	       opers.remove(opers.indexOf(op));
+	       }//if
+	      if (op == "-"){
+                 res =dblstr(numbers.get(opers.indexOf(op)))-dblstr(numbers.get(opers.indexOf(op)+1));                
+                 numbers.add(opers.indexOf(op),String.valueOf(res));
+                 numbers.remove(opers.indexOf(op)+1);
+                 numbers.remove(opers.indexOf(op)+2);
+                 opers.remove(opers.indexOf(op));	      
+	      }
+	      }
+	      }//while
 	}/*while */
-        return 0 ;	
+	return numbers.get(1);	
 	} //proce 
 	private double dblstr(String k){
         try {
@@ -269,6 +297,18 @@ public class Calculator implements ActionListener {
                 txt.setText(se);
 	    
 	}else{
+		ArrayList <String > opers = new ArrayList <>();
+		ArrayList <String > numbers = new ArrayList <>();
+
+		for (Char i :s.toCharArray()){
+		  if (i == "+" || i == "-" || i=="*" || i="/"){
+		  opers.add(i);
+		  }else{
+		  numbers.add(i);
+		  }
+		}
+		String  xxx = calculemultiplex (numbers,opers);
+		txt.setText(xxx);
           
       	}/*else*/
         
