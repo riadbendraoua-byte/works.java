@@ -13,12 +13,15 @@ public class Calculator implements ActionListener {
 	while (numbers.size() > 1 && opers.size() > 0 ){
 	  while (opers.contains ("*") ||opers.contains ("/")){
 		for (String op : opers ){
+			double result = 0 ;
 	         if (op == "*"){
-
+                 result =dblstr(numbers.get(opers.indexOf(op)))*dblstr(numbers.get(opers.indexOf(op)+1));		 
+		 numbers.add(opers.indexOf(op),String.valueOf(result));
+		 numbers.remove(opers.indexOf(op)+1);
+		 opers.remove(opers.indexOf(op));
 		 }
-	  
-	  
-	  }//for 
+	  }//for
+	   
 	  }
 	}/*while */
         return 0 ;	
