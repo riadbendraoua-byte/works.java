@@ -15,51 +15,39 @@ public class Calculator implements ActionListener {
 	return Double.parseDouble(v);
 	}
 	private String calculemultiplex(ArrayList<String> numbers, ArrayList<String> opers) {
-        if (numbers.size() == 0 ){
-	return "0" ;
-	}
-	int i = 0;
-	while (i<opers.size()-1){
-	 String op = opers.get (i);
-	 if (op.equals("*") ){
-	 double a =dblstr(numbers.get(i));
-	 double b = dblstr(numbers.get(i+1));
-	 double res = a*b;
-	 numbers.set(i,String.valueOf(res));
-	 numbers.remove(i+1);
-	 opers.remove(i);
-	 }//if *
-	 else {
-		 if (op.equals("/")){
-		 double a = dblstr(numbers.get(i));
-		 double b = dblstr(numbers.get(i+1));
-		 double res = a/b;
-		 numbers.set (i,String.valueOf(res));
-		 numbers.remove(i+1);
-		 opers.remove(i);
-		 }// if /
-		 else {
-		 i++;
-		 }
-	 }//else /
-         
-	}//while
-	if (!opers.isEmpty()){
-	do {
-	int ix = 0 ;
-	String op = opers.get(i);
-	if (op.equals("+")){
-	double a = dblstr(numbers.get(ix));
-	double b = dblstr(numbers.get(ix+1));
-	double res = a+b;
-	numbers.set(i,String.valueOf(res));
-	numbers.remove(ix+1);
-	opers.remove(ix);
-	}
-	}while(!opers.isEmpty());
-	}
-	return numbers.get(0);
-	}//function
+    
+    for (int i = 0; i < opers.size(); i++) {
+        String op = opers.get(i);
+        
+        if (op.equals("*") || op.equals("/")) {
+            double num1 = dblstr(numbers.get(i));
+            double num2 = dblstr(numbers.get(i+1));
+            double result = op.equals("*") ? num1 * num2 : num1 / num2;
+            
+            numbers.set(i, String.valueOf(result));  
+            numbers.remove(i+1);                      
+            opers.remove(i);                          
+            i--;                                      
+        }
+    }
+    
+    
+    for (int i = 0; i < opers.size(); i++) {
+        String op = opers.get(i);
+        
+        double num1 = dblstr(numbers.get(i));
+        double num2 = dblstr(numbers.get(i+1));
+        double result = op.equals("+") ? num1 + num2 : num1 - num2;
+        
+        numbers.set(i, String.valueOf(result));
+        numbers.remove(i+1);
+        opers.remove(i);
+        i--;
+    }
+    
+    return numbers.get(0); 
+}
+
 
 	public void  calcule () {
 	JPanel p1 = new JPanel () ; 
@@ -274,6 +262,7 @@ public class Calculator implements ActionListener {
                		
 		ArrayList <String > opers = new ArrayList <>();
 		ArrayList <String > numbers = new ArrayList <>();
+		
                   Matcher m = Pattern.compile("\\d+\\.?\\d*|[+\\-*/]").matcher (s);		
 		  while (m.find()){
 			String ko = m.group ();
