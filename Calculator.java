@@ -294,7 +294,7 @@ public class Calculator implements ActionListener {
 	}else{
 		ArrayList <String > opers = new ArrayList <>();
 		ArrayList <String > numbers = new ArrayList <>();
-                Matcher m = Pattern.compile("\\d+\\.̣?\\d*|[+\\-*/]").matcher (s);
+                Matcher m = Pattern.compile("\\d+\\.?\\d*|[+\\-*/]").matcher (s);
 		while (m.find()){
 		 String ko = m.group();
 		  if (ko.equals("+") || ko.equals("-") || ko.equals("*") || ko.equals("/")){
