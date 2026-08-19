@@ -15,39 +15,31 @@ public class Calculator implements ActionListener {
 	return Double.parseDouble(v);
 	}
 	private String calculemultiplex(ArrayList<String> numbers, ArrayList<String> opers) {
-    
     for (int i = 0; i < opers.size(); i++) {
-        String op = opers.get(i);
-        
-        if (op.equals("*") || op.equals("/")) {
-            double num1 = dblstr(numbers.get(i));
-            double num2 = dblstr(numbers.get(i+1));
-            double result = op.equals("*") ? num1 * num2 : num1 / num2;
-            
-            numbers.set(i, String.valueOf(result));  
-            numbers.remove(i+1);                      
-            opers.remove(i);                          
-            i--;                                      
+        if (opers.get(i).equals("*") || opers.get(i).equals("/")) {
+            double result = opers.get(i).equals("*") ? 
+                dblstr(numbers.get(i)) * dblstr(numbers.get(i+1)) :
+                dblstr(numbers.get(i)) / dblstr(numbers.get(i+1));
+            numbers.set(i, String.valueOf(result));
+            numbers.remove(i+1);
+            opers.remove(i);
+            i--; 
         }
     }
     
-    
+   
     for (int i = 0; i < opers.size(); i++) {
-        String op = opers.get(i);
-        
-        double num1 = dblstr(numbers.get(i));
-        double num2 = dblstr(numbers.get(i+1));
-        double result = op.equals("+") ? num1 + num2 : num1 - num2;
-        
+        double result = opers.get(i).equals("+") ?
+            dblstr(numbers.get(i)) + dblstr(numbers.get(i+1)) :
+            dblstr(numbers.get(i)) - dblstr(numbers.get(i+1));
         numbers.set(i, String.valueOf(result));
         numbers.remove(i+1);
         opers.remove(i);
-        i--;
+        i--; 
     }
     
-    return numbers.get(0); 
+    return numbers.get(0);
 }
-
 
 	public void  calcule () {
 	JPanel p1 = new JPanel () ; 
