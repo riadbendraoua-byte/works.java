@@ -19,7 +19,7 @@ public class Calculator implements ActionListener {
 	return "0" ;
 	}
 	int i = 0;
-	while (i<opers.size()-1){
+	while (i<opers.size()){
 	 String op = opers.get (i);
 	 if (op.equals("*") ){
 	 double a =dblstr(numbers.get(i));
@@ -47,12 +47,17 @@ public class Calculator implements ActionListener {
 	if (!opers.isEmpty()){
 	do {
 	int ix = 0 ;
-	String op = opers.get(i);
+		double res = 0 ;
+	String op = opers.get(ix);
 	if (op.equals("+")){
 	double a = dblstr(numbers.get(ix));
 	double b = dblstr(numbers.get(ix+1));
-	double res = a+b;
-	numbers.set(i,String.valueOf(res));
+	 res = a+b;}else{
+        double a = dblstr(numbers.get(ix));
+		double b = dblstr(numbers.get(ix));
+		res =a-b;
+	}
+	numbers.set(ix,String.valueOf(res));
 	numbers.remove(ix+1);
 	opers.remove(ix);
 	}
