@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="works.java" default="build" basedir=".">
+    <description>
+        Build file for works.java project
+    </description>
+
+    <!-- Properties -->
+    <property name="src.dir" value="."/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+
+    <!-- Classpath -->
+    <path id="classpath">
+        <fileset dir="." includes="*.jar"/>
+    </path>
+
+    <!-- Clean target -->
+    <target name="clean" description="Clean build directory">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <!-- Compile target -->
+    <target name="compile" description="Compile Java sources">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" 
+               includes="*.java" 
+               source="11" target="11">
+            <classpath refid="classpath"/>
+        </javac>
+    </target>
+
+    <!-- Build target -->
+    <target name="build" depends="compile" description="Build the project">
+        <echo message="Build successful!"/>
+    </target>
+
+</project>
