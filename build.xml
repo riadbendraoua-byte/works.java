@@ -12,6 +12,7 @@
     <!-- Classpath -->
     <path id="classpath">
         <fileset dir="." includes="*.jar"/>
+        <fileset dir="lib" includes="*.jar"/>
     </path>
 
     <!-- Clean target -->
@@ -24,7 +25,8 @@
         <mkdir dir="${classes.dir}"/>
         <javac srcdir="${src.dir}" destdir="${classes.dir}" 
                includes="*.java" 
-               source="11" target="11">
+               source="11" target="11"
+               includeantruntime="false">
             <classpath refid="classpath"/>
         </javac>
     </target>
